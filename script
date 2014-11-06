@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+require_relative 'importer'
+require_relative 'exporter'
+
+Dir["exporters/*.rb"].each { |exporter| require_relative exporter }
+
+result = Importer.import("stock_items.csv")
+Exporter::StockItems.export(result, "stock_items.json")
